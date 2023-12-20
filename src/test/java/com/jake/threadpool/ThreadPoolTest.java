@@ -10,10 +10,10 @@ class ThreadPoolTest {
      void submittedTasksAreExecuted() {
          final Executor executor = new ThreadPool(2);
 
-         for(int i=0; i < 10; i++) {
+         for(int i=0; i < 100; i++) {
              final int finalI = i;
              executor.execute(() -> {
-                 System.out.println("Thread '" + Thread.currentThread().getName() + "' executes a task " + finalI);
+                 System.err.println("Thread '" + Thread.currentThread().getName() + "' executes a task " + finalI);
 
              });
          }
