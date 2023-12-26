@@ -51,7 +51,7 @@ public class ThreadPool implements Executor {
                                 break;
                             }
 
-                            task = queue.poll(idleTimeoutNano, TimeUnit.NANOSECONDS);
+                            task = queue.poll(waitTimeNanos, TimeUnit.NANOSECONDS);
                             if(task == null) {
                                 break;
                             }

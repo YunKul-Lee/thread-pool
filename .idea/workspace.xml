@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0248bb2-a202-4148-a410-01394e22123d" name="Changes" comment="Thread lazy init 형태로 개선">
+    <list default="true" id="d0248bb2-a202-4148-a410-01394e22123d" name="Changes" comment="쓰레드 유휴시간 옵션추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jake/threadpool/ThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jake/threadpool/ThreadPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/jake/threadpool/ThreadPoolTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/jake/threadpool/ThreadPoolTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +136,7 @@
       <workItem from="1703058315224" duration="4229000" />
       <workItem from="1703075448982" duration="21000" />
       <workItem from="1703503347929" duration="6991000" />
-      <workItem from="1703567878771" duration="2010000" />
+      <workItem from="1703567878771" duration="2325000" />
     </task>
     <task id="LOCAL-00001" summary="쓰레드풀 기본 구현체 추가">
       <option name="closed" value="true" />
@@ -163,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703510864488</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="쓰레드 유휴시간 옵션추가">
+      <option name="closed" value="true" />
+      <created>1703569927371</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1703569927371</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +180,7 @@
     <MESSAGE value="쓰레드풀 기본 구현체 추가" />
     <MESSAGE value="shutdown 관련코드 간소화" />
     <MESSAGE value="Thread lazy init 형태로 개선" />
-    <option name="LAST_COMMIT_MESSAGE" value="Thread lazy init 형태로 개선" />
+    <MESSAGE value="쓰레드 유휴시간 옵션추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="쓰레드 유휴시간 옵션추가" />
   </component>
 </project>
