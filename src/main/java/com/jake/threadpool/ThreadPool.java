@@ -1,11 +1,9 @@
 package com.jake.threadpool;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executor;
-import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
@@ -16,6 +14,7 @@ public class ThreadPool implements Executor {
     private static final Thread[] EMPTY_THREADS_ARRAY = new Thread[0];
     private static final Runnable SHUTDOWN_TASK = () -> {};
     private final int maxNumThreads;
+    private final long idleTimeoutNano;
     private final BlockingQueue<Runnable> queue = new LinkedTransferQueue<>();
     private final AtomicBoolean shutdown = new AtomicBoolean();
     private final Set<Thread> threads = new HashSet<>();
@@ -23,8 +22,9 @@ public class ThreadPool implements Executor {
     private final AtomicInteger numThreads = new AtomicInteger();
     private final AtomicInteger numActiveThreads = new AtomicInteger();
 
-    public ThreadPool(int maxNumThreads) {
+    public ThreadPool(int maxNumThreads, Duration idleTimeout) {
         this.maxNumThreads = maxNumThreads;
+        this.idleTimeoutNano = idleTimeout.toNanos();
     }
 
     private Thread newThread() {
@@ -34,6 +34,7 @@ public class ThreadPool implements Executor {
 
         final Thread thread = new Thread(() -> {
             boolean isActive = true;
+            long lastRunTimeNanos = System.nanoTime();
             try {
                 for (;;) {
                     try {
@@ -43,7 +44,17 @@ public class ThreadPool implements Executor {
                                 isActive = false;
                                 numActiveThreads.decrementAndGet();
                             }
-                            task = queue.take();
+
+                            final long waitTimeNanos = idleTimeoutNano - (System.nanoTime() - lastRunTimeNanos);
+
+                            if(waitTimeNanos <= 0) {
+                                break;
+                            }
+
+                            task = queue.poll(idleTimeoutNano, TimeUnit.NANOSECONDS);
+                            if(task == null) {
+                                break;
+                            }
                             isActive = true;
                             numActiveThreads.incrementAndGet();
                         } else {
@@ -57,11 +68,10 @@ public class ThreadPool implements Executor {
                         if(task == SHUTDOWN_TASK) {
                             break;
                         } else {
-                            numActiveThreads.incrementAndGet();
                             try {
                                 task.run();
                             } finally {
-                                numActiveThreads.decrementAndGet();
+                                lastRunTimeNanos = System.nanoTime();
                             }
                         }
                     } catch(Throwable t) {
@@ -112,12 +122,13 @@ public class ThreadPool implements Executor {
             threadsLock.lock();
             Thread newThread = null;
             try {
-                if(needsMoreThreads()) {
+                if(needsMoreThreads() && !shutdown.get()) {
                     newThread = newThread();
                 }
             } finally {
                 threadsLock.unlock();
             }
+            // Call 'Thread.start()' call out of the lock to minimize the contention.
             if (newThread != null) {
                 newThread.start();
             }

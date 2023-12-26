@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0248bb2-a202-4148-a410-01394e22123d" name="Changes" comment="shutdown 관련코드 간소화">
+    <list default="true" id="d0248bb2-a202-4148-a410-01394e22123d" name="Changes" comment="Thread lazy init 형태로 개선">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jake/threadpool/ThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jake/threadpool/ThreadPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/jake/threadpool/ThreadPoolTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/jake/threadpool/ThreadPoolTest.java" afterDir="false" />
@@ -136,7 +136,8 @@
       <workItem from="1702988667647" duration="902000" />
       <workItem from="1703058315224" duration="4229000" />
       <workItem from="1703075448982" duration="21000" />
-      <workItem from="1703503347929" duration="6881000" />
+      <workItem from="1703503347929" duration="6991000" />
+      <workItem from="1703567878771" duration="2010000" />
     </task>
     <task id="LOCAL-00001" summary="쓰레드풀 기본 구현체 추가">
       <option name="closed" value="true" />
@@ -154,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703060031569</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Thread lazy init 형태로 개선">
+      <option name="closed" value="true" />
+      <created>1703510864488</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1703510864488</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,6 +172,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="쓰레드풀 기본 구현체 추가" />
     <MESSAGE value="shutdown 관련코드 간소화" />
-    <option name="LAST_COMMIT_MESSAGE" value="shutdown 관련코드 간소화" />
+    <MESSAGE value="Thread lazy init 형태로 개선" />
+    <option name="LAST_COMMIT_MESSAGE" value="Thread lazy init 형태로 개선" />
   </component>
 </project>

@@ -2,14 +2,15 @@ package com.jake.threadpool;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 
 class ThreadPoolTest {
 
      @Test
-     void submittedTasksAreExecuted() {
-         final ThreadPool executor = new ThreadPool(100);
+     void submittedTasksAreExecuted() throws Exception {
+         final ThreadPool executor = new ThreadPool(100, Duration.ofSeconds(1));
          final int numTasks = 100;
          final CountDownLatch latch = new CountDownLatch(numTasks);
          try {
@@ -25,6 +26,9 @@ class ThreadPoolTest {
                      latch.countDown();
                  });
              }
+
+             latch.await();
+             Thread.sleep(100000);
          } finally {
              executor.shutdown();
          }
