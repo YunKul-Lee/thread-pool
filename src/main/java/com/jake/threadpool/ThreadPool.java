@@ -9,6 +9,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * TODO ::
+ * - Add `minNumThreads`
+ * - Introduce builder API to introduce more customizable properties
+ * - Make `queue` customizable
+ * - Add `RejectedTaskHandler`
+ * - Add 'UncaughtExceptionHandler`
+ * - Implement `ExecutorService`
+ * - Implement `ScheduledExecutorService`
+ * - Use Micrometer for metric collection
+ * - Return CompletableFuture instead of Future
+ */
 public class ThreadPool implements Executor {
 
     private static final Thread[] EMPTY_THREADS_ARRAY = new Thread[0];
