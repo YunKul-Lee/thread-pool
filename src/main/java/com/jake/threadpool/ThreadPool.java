@@ -46,15 +46,16 @@ public class ThreadPool implements Executor {
                             }
 
                             final long waitTimeNanos = idleTimeoutNano - (System.nanoTime() - lastRunTimeNanos);
+                            if(waitTimeNanos <= 0 ||
+                                    (task = queue.poll(waitTimeNanos, TimeUnit.NANOSECONDS)) == null ) {
 
-                            if(waitTimeNanos <= 0) {
                                 break;
                             }
 
-                            task = queue.poll(waitTimeNanos, TimeUnit.NANOSECONDS);
-                            if(task == null) {
-                                break;
-                            }
+//                            task = queue.poll(waitTimeNanos, TimeUnit.NANOSECONDS);
+//                            if(task == null) {
+//                                break;
+//                            }
                             isActive = true;
                             numActiveThreads.incrementAndGet();
                         } else {
@@ -85,12 +86,21 @@ public class ThreadPool implements Executor {
                 threadsLock.lock();
                 try {
                     threads.remove(Thread.currentThread());
+                    numThreads.decrementAndGet();
+                    if (isActive) {
+                        numActiveThreads.decrementAndGet();
+                    }
+
+                    if(threads.isEmpty() && !queue.isEmpty()) {
+                        for (Runnable task : queue) {
+                            if(task != SHUTDOWN_TASK) {
+                                addThreadIfNecessary();
+                                break;
+                            }
+                        }
+                    }
                 } finally {
                     threadsLock.unlock();
-                }
-                numThreads.decrementAndGet();
-                if (isActive) {
-                    numActiveThreads.decrementAndGet();
                 }
             }
             System.err.println("Shutting down thread '" + Thread.currentThread().getName() + '\'');
@@ -105,6 +115,14 @@ public class ThreadPool implements Executor {
     public void execute(Runnable command) {
         if(shutdown.get()) {
             throw new RejectedExecutionException();
+        }
+        threadsLock.lock();
+        try {
+            if (!queue.isEmpty() && threads.isEmpty()) {
+                return;
+            }
+        } finally {
+            threadsLock.unlock();
         }
 
         queue.add(command);
@@ -138,7 +156,7 @@ public class ThreadPool implements Executor {
     private boolean needsMoreThreads() {
         final int numActiveThreads = this.numActiveThreads.get();
         final int numThreads = this.numThreads.get();
-        return numActiveThreads < maxNumThreads && numActiveThreads >= numThreads;
+        return numActiveThreads >= numThreads && numActiveThreads < maxNumThreads;
     }
 
     public void shutdown() {
