@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
 
 class ThreadPoolTest {
 
@@ -28,7 +27,7 @@ class ThreadPoolTest {
              }
 
              latch.await();
-             Thread.sleep(100000);
+//             Thread.sleep(100000);
          } finally {
              executor.shutdown();
          }

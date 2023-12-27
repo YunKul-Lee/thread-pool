@@ -20,7 +20,7 @@ public class ThreadPool implements Executor {
     private final Set<Thread> threads = new HashSet<>();
     private final Lock threadsLock = new ReentrantLock();
     private final AtomicInteger numThreads = new AtomicInteger();
-    private final AtomicInteger numActiveThreads = new AtomicInteger();
+    private final AtomicInteger numBusyThreads = new AtomicInteger();
 
     public ThreadPool(int maxNumThreads, Duration idleTimeout) {
         this.maxNumThreads = maxNumThreads;
@@ -30,19 +30,19 @@ public class ThreadPool implements Executor {
     private Thread newThread() {
 
         numThreads.incrementAndGet();
-        numActiveThreads.incrementAndGet();
+        numBusyThreads.incrementAndGet();
 
         final Thread thread = new Thread(() -> {
-            boolean isActive = true;
+            boolean isBusy = true;
             long lastRunTimeNanos = System.nanoTime();
             try {
                 for (;;) {
                     try {
                         Runnable task = queue.poll();
                         if (task == null) {
-                            if( isActive ) {
-                                isActive = false;
-                                numActiveThreads.decrementAndGet();
+                            if( isBusy ) {
+                                isBusy = false;
+                                numBusyThreads.decrementAndGet();
                             }
 
                             final long waitTimeNanos = idleTimeoutNano - (System.nanoTime() - lastRunTimeNanos);
@@ -56,12 +56,12 @@ public class ThreadPool implements Executor {
 //                            if(task == null) {
 //                                break;
 //                            }
-                            isActive = true;
-                            numActiveThreads.incrementAndGet();
+                            isBusy = true;
+                            numBusyThreads.incrementAndGet();
                         } else {
-                            if(!isActive) {
-                                isActive = true;
-                                numActiveThreads.incrementAndGet();
+                            if(!isBusy) {
+                                isBusy = true;
+                                numBusyThreads.incrementAndGet();
                             }
                         }
 
@@ -87,8 +87,8 @@ public class ThreadPool implements Executor {
                 try {
                     threads.remove(Thread.currentThread());
                     numThreads.decrementAndGet();
-                    if (isActive) {
-                        numActiveThreads.decrementAndGet();
+                    if (isBusy) {
+                        numBusyThreads.decrementAndGet();
                     }
 
                     if(threads.isEmpty() && !queue.isEmpty()) {
@@ -154,7 +154,7 @@ public class ThreadPool implements Executor {
     }
 
     private boolean needsMoreThreads() {
-        final int numActiveThreads = this.numActiveThreads.get();
+        final int numActiveThreads = this.numBusyThreads.get();
         final int numThreads = this.numThreads.get();
         return numActiveThreads >= numThreads && numActiveThreads < maxNumThreads;
     }

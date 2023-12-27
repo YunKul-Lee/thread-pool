@@ -7,6 +7,7 @@
     <list default="true" id="d0248bb2-a202-4148-a410-01394e22123d" name="Changes" comment="race condition 해결">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jake/threadpool/ThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jake/threadpool/ThreadPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/jake/threadpool/ThreadPoolTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/jake/threadpool/ThreadPoolTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +139,7 @@
       <workItem from="1703503347929" duration="6991000" />
       <workItem from="1703567878771" duration="3185000" />
       <workItem from="1703645194688" duration="2311000" />
-      <workItem from="1703657468341" duration="747000" />
+      <workItem from="1703657468341" duration="1243000" />
     </task>
     <task id="LOCAL-00001" summary="쓰레드풀 기본 구현체 추가">
       <option name="closed" value="true" />
@@ -180,7 +181,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703570394626</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="race condition 해결">
+      <option name="closed" value="true" />
+      <created>1703658226427</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1703658226427</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
