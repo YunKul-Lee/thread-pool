@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0248bb2-a202-4148-a410-01394e22123d" name="Changes" comment="변수명 변경">
+    <list default="true" id="d0248bb2-a202-4148-a410-01394e22123d" name="Changes" comment="TODO 추가">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jake/threadpool/ThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jake/threadpool/ThreadPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/jake/threadpool/ThreadPoolTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/jake/threadpool/ThreadPoolTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +59,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.ThreadPoolTest">
+  <component name="RunManager" selected="Gradle.ThreadPoolTest.submittedTasksAreExecuted">
     <configuration name="ThreadPoolTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -108,8 +110,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ThreadPoolTest" />
         <item itemvalue="Gradle.ThreadPoolTest.submittedTasksAreExecuted" />
+        <item itemvalue="Gradle.ThreadPoolTest" />
       </list>
     </recent_temporary>
   </component>
@@ -138,7 +140,13 @@
       <workItem from="1703503347929" duration="6991000" />
       <workItem from="1703567878771" duration="3185000" />
       <workItem from="1703645194688" duration="2311000" />
-      <workItem from="1703657468341" duration="1925000" />
+      <workItem from="1703657468341" duration="2482000" />
+      <workItem from="1703741917691" duration="16000" />
+      <workItem from="1703742283439" duration="7000" />
+      <workItem from="1704858340075" duration="3712000" />
+      <workItem from="1704862081177" duration="2680000" />
+      <workItem from="1704943182166" duration="7000" />
+      <workItem from="1705050709468" duration="4574000" />
     </task>
     <task id="LOCAL-00001" summary="쓰레드풀 기본 구현체 추가">
       <option name="closed" value="true" />
@@ -196,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703658796790</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="TODO 추가">
+      <option name="closed" value="true" />
+      <created>1703659681570</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1703659681570</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +226,7 @@
     <MESSAGE value="유휴시간 오류수정" />
     <MESSAGE value="race condition 해결" />
     <MESSAGE value="변수명 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="변수명 변경" />
+    <MESSAGE value="TODO 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="TODO 추가" />
   </component>
 </project>

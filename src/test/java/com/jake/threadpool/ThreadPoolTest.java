@@ -9,11 +9,11 @@ class ThreadPoolTest {
 
      @Test
      void submittedTasksAreExecuted() throws Exception {
-         final ThreadPool executor = new ThreadPool(100, Duration.ofSeconds(1));
-         final int numTasks = 100;
+         final ThreadPool executor = new ThreadPool(3,6, Duration.ofNanos(1));
+         final int numTasks = 10000;
          final CountDownLatch latch = new CountDownLatch(numTasks);
          try {
-             for(int i=0; i < 100; i++) {
+             for(int i=0; i < numTasks; i++) {
                  final int finalI = i;
                  executor.execute(() -> {
                      System.err.println("Thread '" + Thread.currentThread().getName() + "' executes a task " + finalI);
